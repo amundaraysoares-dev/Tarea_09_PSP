@@ -11,7 +11,7 @@ public class Descargas extends Thread {
         this.TiempoFinal = 0;
 
     }
-
+    @Override
     public void run() {
         int tiempo = 0;
 
@@ -26,9 +26,17 @@ public class Descargas extends Thread {
         }
 
         TiempoFinal = TiempoFinal + tiempo;
-        Porcentaje = (i * 100)/10;
-            System.out.println("["+descargar+"]"+Porcentaje+ "%");
+        try {
+            Thread.sleep(tiempo);
+        } catch (InterruptedException e) {
+            System.out.println("Descarga interrumpida: " + descargar);
         }
+
+        Porcentaje = (i * 100)/10;
+            System.out.println("["+"Descarga-"+descargar+"]"+Porcentaje+ "%");
+        }
+
+
         System.out.println("["+descargar+"]"+"completada en "+TiempoFinal+
                 " ms");
 

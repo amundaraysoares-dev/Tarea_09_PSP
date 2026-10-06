@@ -1,33 +1,45 @@
 public class GestorDescargas {
     public static void main(String[] args) {
-        Descargas p1 = new Descargas("Descarga-cuarzos.png");
-        Descargas p2 = new Descargas("Descarga-meditacion.mp4");
-        Descargas p3 = new Descargas("Descarga-mantras.mp3");
-        Descargas p4 = new Descargas("Descarga-horoscopo.pdf");
 
 
-        p1.start();
-        p2.start();
-        p3.start();
-        p4.start();
+        String[] Archivos = {
+                "meditacion.mp4",
+                "documental.mkv",
+                "musica.mp3",
+                "tutorial.pdf"
+        };
 
-        try {
-            p1.join();
-            p2.join();
-            p3.join();
-            p4.join();
+        Descargas[] L_descargas = new Descargas[Archivos.length];
 
-        }catch (InterruptedException e) {
-            System.out.println("Fallo del proceso");
-
+        for (int i =0;i < Archivos.length; i++){
+            L_descargas[i] = new Descargas(Archivos[i]);
         }
-        int TiempoReal =Math.max(Math.max(p1.get_TiempoFinal(), p2.get_TiempoFinal()),
-                Math.max(p3.get_TiempoFinal(), p4.get_TiempoFinal()));
+        long tInicio = System.currentTimeMillis();
 
-        int T_DescargasSeguidas = p1.get_TiempoFinal() + p2.get_TiempoFinal()+ p3.get_TiempoFinal()+p4.get_TiempoFinal();
+        for (Descargas descarga : L_descargas) {
+            descarga.start();
+        }
+
+
+        for (Descargas descarga : L_descargas) {
+            try {
+                descarga.join();
+            } catch (InterruptedException e) {
+                System.err.println("El hilo principal fue interrumpido: " + e.getMessage());
+            }
+        }
+
+        long tFin = System.currentTimeMillis();
+        long TiempoReal = tFin - tInicio;
+
+
+        int T_DescargasSeguidas = 0;
+        for (Descargas descarga : L_descargas) {
+            T_DescargasSeguidas += descarga.get_TiempoFinal();
+        }
         System.out.println("Todas las descargas han terminado.");
         System.out.println("Tiempo real: "+TiempoReal+" ms");
-        System.out.println("Si se hubieran descargado una detrás de otra: "+T_DescargasSeguidas);
+        System.out.println("Si se hubieran descargado una detrás de otra: "+T_DescargasSeguidas+ "ms");
     }
 
 
