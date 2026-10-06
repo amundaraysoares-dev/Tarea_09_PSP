@@ -163,6 +163,6 @@ Process finished with exit code 0
 
 ## Declaración de uso de IA
 Uso de IA: lo único fue para preguntarle dudas sobre el cálculo del tiempoReal y que me ponga bonito el markdown.
-Prompt: `como funciona el System.currentTimeMillis() `
-Prompt: `puedes decorar mi markdown para que se vea bonito`
+- Prompt: `como funciona el System.currentTimeMillis() `
+- Prompt: `puedes decorar mi markdown para que se vea bonito`
 
