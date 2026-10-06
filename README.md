@@ -1,5 +1,7 @@
 # Tarea 09
 
+pequeña aclaracion: tuve un enfoque distinto en el gestor de archivos pero luego hice un cambio para mejorar mi codigo por recomendacion de un compañero [isaac] y aclara que no esta copiado y soy conciente de que hace mi codigo
+
 ## Clase Descarga:
 Lo primero que tendremos que hacer es crear la clase y asignarle sus respectivos atributos:
 - descarga
@@ -119,4 +121,6 @@ Si se hubieran descargado una detrás de otra: 12800
 
 Process finished with exit code 0
 ```
-
+## Parte 2
+![Captura de pantalla 2026-10-06 155734.png](psp_9/Captura%20de%20pantalla%202026-10-06%20155734.png)
+![img.png](psp_9/img.png)

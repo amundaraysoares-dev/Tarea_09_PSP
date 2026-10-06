@@ -1,33 +1,57 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 public class GestorDescargas {
     public static void main(String[] args) {
+        boolean ejecutor = true;
+        Scanner teclado = new Scanner(System.in);
+        List<String> Archivos = new ArrayList<>();
 
+        while (true){
+            System.out.println("dime un archivo para descargar o ejecutar para lanzar la descarga");
+            String opcion = teclado.nextLine().trim();
+            if (opcion.equalsIgnoreCase("ejecutar")){
 
-        String[] Archivos = {
-                "meditacion.mp4",
-                "documental.mkv",
-                "musica.mp3",
-                "tutorial.pdf"
-        };
+                break;
+            }else{
+                Archivos.add(opcion);
+            }
 
-        Descargas[] L_descargas = new Descargas[Archivos.length];
+        }
+        if (Archivos.size()==0){
+            Archivos.add("meditacion.mp4");
+            Archivos.add("documental.mkv");
+            Archivos.add("musica.mp3");
+            Archivos.add("tutorial.pdf");
 
-        for (int i =0;i < Archivos.length; i++){
-            L_descargas[i] = new Descargas(Archivos[i]);
+        }
+
+        Descargas[] L_descargas = new Descargas[Archivos.size()];
+
+        for (int i =0;i < Archivos.size(); i++){
+            L_descargas[i] = new Descargas(Archivos.get(i));
         }
         long tInicio = System.currentTimeMillis();
 
         for (Descargas descarga : L_descargas) {
             descarga.start();
         }
-
+        Monitor monitor = new Monitor(L_descargas);
+        Thread monitoreo = new Thread(monitor,"monitor");
+        monitoreo.start();
 
         for (Descargas descarga : L_descargas) {
             try {
                 descarga.join();
+                monitoreo.join();
             } catch (InterruptedException e) {
                 System.err.println("El hilo principal fue interrumpido: " + e.getMessage());
             }
         }
+
+
+
+
 
         long tFin = System.currentTimeMillis();
         long TiempoReal = tFin - tInicio;
