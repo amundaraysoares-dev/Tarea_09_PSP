@@ -7,6 +7,7 @@ public class GestorDescargas {
         Scanner teclado = new Scanner(System.in);
         List<String> Archivos = new ArrayList<>();
 
+        // bucle para pedir nombres de archivos por teclado
         while (true){
             System.out.println("dime un archivo para descargar o ejecutar para lanzar la descarga");
             String opcion = teclado.nextLine().trim();
@@ -18,6 +19,7 @@ public class GestorDescargas {
             }
 
         }
+        // asignacion por defecto de archivos
         if (Archivos.size()==0){
             Archivos.add("meditacion.mp4");
             Archivos.add("documental.mkv");
@@ -28,18 +30,23 @@ public class GestorDescargas {
 
         Descargas[] L_descargas = new Descargas[Archivos.size()];
 
+        // crea cada objeto Descargas
         for (int i =0;i < Archivos.size(); i++){
             L_descargas[i] = new Descargas(Archivos.get(i));
         }
+
         long tInicio = System.currentTimeMillis();
 
+        // lanza todos los hilo
         for (Descargas descarga : L_descargas) {
             descarga.start();
         }
+        // crea e inicia el hilo Monitor
         Monitor monitor = new Monitor(L_descargas);
         Thread monitoreo = new Thread(monitor,"monitor");
         monitoreo.start();
 
+        // espera de finalizacion de los procesos
         for (Descargas descarga : L_descargas) {
             try {
                 descarga.join();
@@ -54,9 +61,10 @@ public class GestorDescargas {
 
 
         long tFin = System.currentTimeMillis();
+        //calculo del tiempo real transcurrido
         long TiempoReal = tFin - tInicio;
 
-
+        // calculo de las descargas seguidas
         int T_DescargasSeguidas = 0;
         for (Descargas descarga : L_descargas) {
             T_DescargasSeguidas += descarga.get_TiempoFinal();

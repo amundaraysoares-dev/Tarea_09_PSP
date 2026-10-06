@@ -160,3 +160,9 @@ Process finished with exit code 0
     * Ahora, en un bloque `try`, haremos que el proceso descanse `500 ms` entre cada *tick* de comprobación.
 
 ![Captura de pantalla 2026-10-06 172423.png](psp_9/Captura%20de%20pantalla%202026-10-06%20172423.png)
+
+## Declaración de uso de IA
+Uso de IA: lo único fue para preguntarle dudas sobre el cálculo del tiempoReal y que me ponga bonito el markdown.
+Prompt: `como funciona el System.currentTimeMillis() `
+Prompt: `puedes decorar mi markdown para que se vea bonito`
+
