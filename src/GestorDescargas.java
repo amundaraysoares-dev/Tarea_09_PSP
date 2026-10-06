@@ -23,12 +23,15 @@ public class GestorDescargas {
         if (Archivos.size()==0){
             Archivos.add("meditacion.mp4");
             Archivos.add("documental.mkv");
-            Archivos.add("musica.mp3");
+            Archivos.add("mantras.mp3");
             Archivos.add("tutorial.pdf");
 
         }
 
+
         Descargas[] L_descargas = new Descargas[Archivos.size()];
+
+
 
         // crea cada objeto Descargas
         for (int i =0;i < Archivos.size(); i++){

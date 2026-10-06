@@ -19,8 +19,6 @@ Luego crearemos un constructor e iniciaremos los atributos:
 
 ![foto](psp_9/Captura%20de%20pantalla%202026-10-06%20123225.png)
 
-### 🔄 Método `run()` (Seguimiento del proceso)
-
 - Vamos a crear una variable de tiempo que se inicia en `0`, junto a otra de porcentaje que también se inicia en `0`.
 - Ahora haremos un bucle el cual se ejecutará **10 veces** y se encargará de hacer lo siguiente:
   - En una variable `num` va a almacenar aleatoriamente uno de estos dos dígitos (`0` o `1`) y, dependiendo de cuál toque, le asignará un tiempo en ms al proceso (`0 = 100 ms` o `1 = 500 ms`).
@@ -133,7 +131,7 @@ Si se hubieran descargado una detrás de otra: 12800
 
 Process finished with exit code 0
 ```
-## 🖥️ Parte 2 — Entrada Dinámica y Monitorización
+## 🖥️ Parte 2 
 
 - Para la parte dos, tuve que cambiar el gestor para agregarle un método el cual detecte nuestro teclado y haga procesos de descarga con los nombres que le pasemos.
 - Básicamente hago un `ArrayList` que se llama `archivos` y en un bucle voy a ir preguntando los nombres, que luego se almacenarán con un `.add()` en el array.
@@ -161,8 +159,33 @@ Process finished with exit code 0
 
 ![Captura de pantalla 2026-10-06 172423.png](psp_9/Captura%20de%20pantalla%202026-10-06%20172423.png)
 
+## Parte 3: 🚀 Nivel 3 
+
+* **Versión simplificada:** He creado una versión simplificada del gestor de descargas porque, si no, me era imposible implementarlo con el de la Parte 2.
+
+### ⏱️ Control de tiempo y estado
+* **Espera de 3 segundos:** Para conseguir que el programa espere ese tiempo y envíe el mensaje, tuve que:
+    * Usar `join(3000)`, que permite definir un tiempo límite de espera antes de continuar.
+    * Comprobar con `isAlive()` si el proceso sigue activo para enviar el mensaje avisando de que continúa en segundo plano.
+
+![Aviso de segundo plano](psp_9/img_1.png)
+![Salida de la consola](psp_9/Captura%20de%20pantalla%202026-10-06%20215449.png)
+
+### 🛠️ Instalador
+* **Parámetros del Instalador:** Le pasamos las referencias de los dos procesos específicos que debe esperar (`meditacion.mp4` y `mantras.mp3`).
+* **Lógica del `run()`:** Dentro de un bloque `try-catch`, se verifica que los procesos no sean `null` y, tras esperar su finalización, se envía el mensaje indicando que la instalación se ha completado.
+
+![Código del Instalador](psp_9/Captura%20de%20pantalla%202026-10-06%20215439.png)
+
+
+
+
 ## Declaración de uso de IA
 Uso de IA: lo único fue para preguntarle dudas sobre el cálculo del tiempoReal y que me ponga bonito el markdown.
 - Prompt: `como funciona el System.currentTimeMillis() `
-- Prompt: `puedes decorar mi markdown para que se vea bonito`
+- Prompt: `puedes decorar mi markdown para que se vea bonito y pon titulos  guapos`
+tambien le tuve que preguntar esto por que no sabia como implementar los 3 segundos de espera del proceso
+- Prompt: `como puedo hacer para que el join espere una cierta cantidad de tiempo `
+
+
 
